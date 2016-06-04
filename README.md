@@ -1,10 +1,11 @@
-#Basic Project
+#Automation Project
 
-*Java basic project structure*
+*Basic Automation Project Structure*
 
 **Java 7**
 
-* Java Application
 * Maven
+* TestNG
+* Selenium WebDriver
 
 [Jean-francois Nepton](http://sqasolution.com)
