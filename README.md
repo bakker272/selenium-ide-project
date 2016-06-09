@@ -1,10 +1,11 @@
-#Basic Project
+#Selenium IDE Import Project
 
-*Java basic project structure*
+*Project which uses Selenium IDE and exports the test to Java with TestNG. Code is then modified to support data driven testing with proper assertions.
 
-**Java 7**
+Java 7
 
-* Java Application
 * Maven
+* Selenium
+* TestNG
 
-[Jean-francois Nepton](http://sqasolution.com)
+[Anand Yerramsetty](http://sqasolution.com)
