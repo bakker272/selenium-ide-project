@@ -8,7 +8,7 @@
  *
  */
 
-package com.sqa.jf.helpers;
+package com.sqa.ay.helpers;
 
 /**
  * Snippet //ADDD (description of class)
