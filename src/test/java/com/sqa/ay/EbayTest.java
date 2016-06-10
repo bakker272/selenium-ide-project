@@ -1,37 +1,75 @@
 package com.sqa.ay;
 
-import static org.testng.Assert.*;
-
 import java.util.concurrent.*;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.*;
 import org.openqa.selenium.firefox.*;
+import org.openqa.selenium.opera.*;
+import org.openqa.selenium.safari.*;
 import org.testng.annotations.*;
 
 public class EbayTest {
 	private boolean acceptNextAlert = true;
-	private String baseUrl;
+	private String baseUrl = "http://www.ebay.com/";
 	private WebDriver driver;
 	private StringBuffer verificationErrors = new StringBuffer();
 
-	@BeforeClass(alwaysRun = true)
-	public void setUp() throws Exception {
-		this.driver = new FirefoxDriver();
-		this.baseUrl = "http://www.ebay.com/";
+	@BeforeClass(enabled = false)
+	public void setUpChrome() throws Exception {
+		System.setProperty("webdriver.chrome.driver", "drivers/chromedriver");
+		this.driver = new ChromeDriver();
 		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 
-	@AfterClass(alwaysRun = true)
-	public void tearDown() throws Exception {
-		this.driver.quit();
-		String verificationErrorString = this.verificationErrors.toString();
-		if (!"".equals(verificationErrorString)) {
-			fail(verificationErrorString);
-		}
+	@BeforeClass(enabled = false)
+	public void setUpFirefox() throws Exception {
+		this.driver = new FirefoxDriver();
+		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
+
+	// @BeforeClass(enabled = true)
+	// public void setUpOpera() throws Exception {
+	// System.setProperty("webdriver.opera.driver", "drivers/operadriver");
+	// this.driver = new OperaDriver();
+	// this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+	// }
+
+	@BeforeClass(enabled = false)
+	public void setUpSafari() throws Exception {
+		System.setProperty("webdriver.safari.driver", "drivers/SafariDriver.safariextz");
+		this.driver = new SafariDriver();
+		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+	}
+
+	// @BeforeClass(enable = true)
+	// public void setUpChrome() throws Exception {
+	// System.setProperty("webdriver.chrome.driver", "drivers/chromedriver");
+	// this.driver = new ChromeDriver();
+	//
+	// this.baseUrl = "http://www.ebay.com/";
+	// this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+	// }
+
+	// @AfterClass(alwaysRun = true)
+	// public void tearDown() throws Exception {
+	// this.driver.quit();
+	// String verificationErrorString = this.verificationErrors.toString();
+	// if (!"".equals(verificationErrorString)) {
+	// fail(verificationErrorString);
+	// }
+	// }
 
 	@Test
 	public void testEbay() throws Exception {
+
+		// System.setProperty("webdriver.chrome.driver",
+		// "drivers/chromedriver");
+		// this.driver = new ChromeDriver();
+
+		System.setProperty("webdriver.opera.driver", "drivers/operadriver");
+		this.driver = new OperaDriver();
+
 		this.driver.get(this.baseUrl + "/");
 		this.driver.findElement(By.linkText("Sign in")).click();
 		this.driver.findElement(By.xpath("//div[@id='pri_signin']/div[4]/span[2]/input")).clear();
@@ -47,11 +85,19 @@ public class EbayTest {
 		this.driver.findElement(By.linkText("BURBERRY BRIT for Men * Cologne * 3.3 / 3.4 oz * BRAND NEW TESTER"))
 				.click();
 		this.driver.findElement(By.id("isCartBtn_btn")).click();
+
+		// Verification
+		// Todo insert Alert
+
 		this.driver.findElement(By.linkText("Remove")).click();
+
+		// Signout
+
 		this.driver.findElement(By.cssSelector("b.gh-eb-arw.gh-sprRetina")).click();
 		this.driver.findElement(By.linkText("Sign out")).click();
 	}
 
+	@SuppressWarnings("unused")
 	private String closeAlertAndGetItsText() {
 		try {
 			Alert alert = this.driver.switchTo().alert();
@@ -67,6 +113,7 @@ public class EbayTest {
 		}
 	}
 
+	@SuppressWarnings("unused")
 	private boolean isAlertPresent() {
 		try {
 			this.driver.switchTo().alert();
@@ -76,6 +123,7 @@ public class EbayTest {
 		}
 	}
 
+	@SuppressWarnings("unused")
 	private boolean isElementPresent(By by) {
 		try {
 			this.driver.findElement(by);
