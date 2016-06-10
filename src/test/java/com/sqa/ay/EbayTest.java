@@ -15,7 +15,7 @@ public class EbayTest {
 	private WebDriver driver;
 	private StringBuffer verificationErrors = new StringBuffer();
 
-	@BeforeClass(enabled = false)
+	@BeforeClass(enabled = true)
 	public void setUpChrome() throws Exception {
 		System.setProperty("webdriver.chrome.driver", "drivers/chromedriver");
 		this.driver = new ChromeDriver();
@@ -28,37 +28,28 @@ public class EbayTest {
 		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 
-	// @BeforeClass(enabled = true)
-	// public void setUpOpera() throws Exception {
-	// System.setProperty("webdriver.opera.driver", "drivers/operadriver");
-	// this.driver = new OperaDriver();
-	// this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-	// }
+	@BeforeClass(enabled = false)
+	public void setUpOpera() throws Exception {
+		System.setProperty("webdriver.opera.driver", "drivers/operadriver");
+		this.driver = new OperaDriver();
+		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+	}
 
 	@BeforeClass(enabled = false)
 	public void setUpSafari() throws Exception {
-		System.setProperty("webdriver.safari.driver", "drivers/SafariDriver.safariextz");
+
 		this.driver = new SafariDriver();
 		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 
-	// @BeforeClass(enable = true)
-	// public void setUpChrome() throws Exception {
-	// System.setProperty("webdriver.chrome.driver", "drivers/chromedriver");
-	// this.driver = new ChromeDriver();
-	//
-	// this.baseUrl = "http://www.ebay.com/";
-	// this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-	// }
-
-	// @AfterClass(alwaysRun = true)
-	// public void tearDown() throws Exception {
-	// this.driver.quit();
-	// String verificationErrorString = this.verificationErrors.toString();
-	// if (!"".equals(verificationErrorString)) {
-	// fail(verificationErrorString);
-	// }
-	// }
+	@AfterClass(alwaysRun = true)
+	public void tearDown() throws Exception {
+		this.driver.quit();
+		String verificationErrorString = this.verificationErrors.toString();
+		if (!"".equals(verificationErrorString)) {
+			fail(verificationErrorString);
+		}
+	}
 
 	@Test
 	public void testEbay() throws Exception {
@@ -67,8 +58,9 @@ public class EbayTest {
 		// "drivers/chromedriver");
 		// this.driver = new ChromeDriver();
 
-		System.setProperty("webdriver.opera.driver", "drivers/operadriver");
-		this.driver = new OperaDriver();
+		// System.setProperty("webdriver.safari.driver",
+		// "drivers/SafariDriver.safariextz");
+		// this.driver = new SafariDriver();
 
 		this.driver.get(this.baseUrl + "/");
 		this.driver.findElement(By.linkText("Sign in")).click();
@@ -111,6 +103,14 @@ public class EbayTest {
 		} finally {
 			this.acceptNextAlert = true;
 		}
+	}
+
+	/**
+	 * @param verificationErrorString
+	 */
+	private void fail(String verificationErrorString) {
+		// TODO Auto-generated method stub
+
 	}
 
 	@SuppressWarnings("unused")
