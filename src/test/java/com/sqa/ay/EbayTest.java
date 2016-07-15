@@ -132,4 +132,11 @@ public class EbayTest {
 			return false;
 		}
 	}
+
+@AfterTest
+private void afterTest()
+{this.driver.close();
+ this.driver.quite();
+
+}
 }
